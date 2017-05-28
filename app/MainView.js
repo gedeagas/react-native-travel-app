@@ -10,7 +10,8 @@ import {
 	TextInput,
 	Animated,
 	Easing,
-	ScrollView
+	ScrollView,
+	TouchableOpacity
 } from "react-native";
 //Import From Node Modules
 import { StackNavigator } from "react-navigation";
@@ -20,6 +21,8 @@ import Carousel from "./Component/Carousel";
 import CardView from "./Component/CardView"
 import CarouselPicture from "./Component/CarouselPicture";
 import CardImage from "./Component/CardImage";
+import SideMenu from "./Component/SideMenu";
+
 
 let { height, width } = Dimensions.get("window");
 let lebarSlider = width;
@@ -31,6 +34,7 @@ export default class MainView extends Component {
 		this.state = {
 			text: "",
 			searchOpacity: new Animated.Value(0),
+			menuWidth: new Animated.Value(-width),
 			width: 0,
 			height: 0
 		};
@@ -52,15 +56,21 @@ export default class MainView extends Component {
 		this.setState({ width: width, height: height });
 	}
 
+	burgerMenuTrigger() {
+		Animated.timing(
+			// Animate value over time
+			this.state.menuWidth, // The value to drive
+			{	
+				toValue: 0,
+				easing: Easing.bounce // Animate to final value of 1
+			}
+		).start();
+
+	}
+
 	render() {
 		return (
-			<ScrollView style={styles.container} onScroll={this.handleScroll} bounces={false}>
-
-				<StatusBar
-					backgroundColor="rgba(107, 47, 198, 0.0)"
-					translucent={true}
-					barStyle="light-content"
-				/>
+			<View>
 				<Animated.View
 					style={{
 						backgroundColor: "#6A2EC7",
@@ -71,80 +81,104 @@ export default class MainView extends Component {
 						opacity: this.state.searchOpacity
 					}}
 				/>
-				<Image
-					style={styles.MainMenuContainer}
-					source={require("./Assets/Image/home.jpg")}
-				>
-					<Text />
-					<Text style={styles.MainMenuTitle}>Travelokal</Text>
-					<Text />
 
-				</Image>
 
-				<TextInput
-					placeholder="Search Now..."
-					style={styles.TextInputStyle}
-					onChangeText={text => this.setState({ text })}
-					value={this.state.text}
-					onFocus={this.cumaCobaCoba.bind(this)}
-					underlineColorAndroid="rgba(0,0,0,0)"
-				/>
-				<Text>{this.state.coba}</Text>
-				<Carousel
-					style={styles.carouselContainer}
-					ref={carousel => {
-						this._carousel = carousel;
-					}}
-					sliderWidth={lebarSlider}
-					itemWidth={lebarItem}
-					firstItem={2}
-				>
-					<CarouselPicture source={require("./Assets/Image/cr1.jpg")}/>
-					<CarouselPicture source={require("./Assets/Image/cr2.jpg")}/>
-					<CarouselPicture source={require("./Assets/Image/cr3.jpg")}/>
-					<CarouselPicture source={require("./Assets/Image/cr1.jpg")}/>
-					<CarouselPicture source={require("./Assets/Image/cr2.jpg")}/>
-					<CarouselPicture source={require("./Assets/Image/cr3.jpg")}/>
-					<CarouselPicture source={require("./Assets/Image/cr1.jpg")}/>
-
-					
-				</Carousel>
-				<Text style={styles.subTitle}>Places in Bali</Text>
-
-				<ScrollView
-					horizontal={true}
-					showsHorizontalScrollIndicator={false}
-					style={styles.squareGuideContainer}
-				>
-					<CardImage source={require("./Assets/Image/sq4.jpg")}/>
-					<CardImage source={require("./Assets/Image/sq2.jpg")}/>
-					<CardImage source={require("./Assets/Image/sq3.jpg")}/>
-					<CardImage source={require("./Assets/Image/sq1.jpg")}/>
-
-				</ScrollView>
-
-				<Text style={styles.subTitle}>Trending Place</Text>
-
-				<CardView 
-				title={"Seminyak Beach Club"}
-				price={"399,500"}
-				source={require("./Assets/Image/list1.jpg")}
-				/>
-
-				<CardView 
-				title={"Valka Bali Central Seminyak"}
-				price={"399,500"}
-				source={require("./Assets/Image/list2.jpg")}
-				/>
-
-				<CardView 
-				title={"Amana Bali Villas"}
-				price={"IDR1,237,769"}
-				source={require("./Assets/Image/list3.jpeg")}
-				/>
+				<SideMenu menuWidth={this.state.menuWidth} height={height}/>
 				
 
-			</ScrollView>
+
+				<ScrollView style={styles.container} onScroll={this.handleScroll} bounces={false}>
+					<StatusBar
+						backgroundColor="rgba(107, 47, 198, 0.0)"
+						translucent={true}
+						barStyle="light-content"
+					/>
+					<Image
+						style={styles.MainMenuContainer}
+						source={require("./Assets/Image/home.jpg")}
+					>
+						<TouchableOpacity  onPress={this.burgerMenuTrigger.bind(this)}>
+							<Image
+							style={{width:27,height:27}}
+							source={require("./Assets/Image/brgr.png")}
+							/>
+						</TouchableOpacity>
+
+						<View>
+							<Text style={styles.MainMenuTitle}>Travelokal</Text>
+						</View>
+
+						<View>
+						</View>
+
+					</Image>
+
+					<TextInput
+						placeholder="Search Now..."
+						style={styles.TextInputStyle}
+						onChangeText={text => this.setState({ text })}
+						value={this.state.text}
+						onFocus={this.cumaCobaCoba.bind(this)}
+						underlineColorAndroid="rgba(0,0,0,0)"
+					/>
+					<Text>{this.state.coba}</Text>
+					<Carousel
+						style={styles.carouselContainer}
+						ref={carousel => {
+							this._carousel = carousel;
+						}}
+						sliderWidth={lebarSlider}
+						itemWidth={lebarItem}
+						firstItem={2}
+					>
+						<CarouselPicture source={require("./Assets/Image/cr1.jpg")}/>
+						<CarouselPicture source={require("./Assets/Image/cr2.jpg")}/>
+						<CarouselPicture source={require("./Assets/Image/cr3.jpg")}/>
+						<CarouselPicture source={require("./Assets/Image/cr1.jpg")}/>
+						<CarouselPicture source={require("./Assets/Image/cr2.jpg")}/>
+						<CarouselPicture source={require("./Assets/Image/cr3.jpg")}/>
+						<CarouselPicture source={require("./Assets/Image/cr1.jpg")}/>
+
+						
+					</Carousel>
+					<Text style={styles.subTitle}>Places in Bali</Text>
+
+					<ScrollView
+						horizontal={true}
+						showsHorizontalScrollIndicator={false}
+						style={styles.squareGuideContainer}
+					>
+						<CardImage source={require("./Assets/Image/sq4.jpg")}/>
+						<CardImage source={require("./Assets/Image/sq2.jpg")}/>
+						<CardImage source={require("./Assets/Image/sq3.jpg")}/>
+						<CardImage source={require("./Assets/Image/sq1.jpg")}/>
+
+					</ScrollView>
+
+					<Text style={styles.subTitle}>Trending Place</Text>
+
+					<CardView 
+					title={"Seminyak Beach Club"}
+					price={"399,500"}
+					source={require("./Assets/Image/list1.jpg")}
+					/>
+
+					<CardView 
+					title={"Valka Bali Central Seminyak"}
+					price={"399,500"}
+					source={require("./Assets/Image/list2.jpg")}
+					/>
+
+					<CardView 
+					title={"Amana Bali Villas"}
+					price={"IDR1,237,769"}
+					source={require("./Assets/Image/list3.jpeg")}
+					/>
+					
+
+				</ScrollView>
+			</View>
+				
 		);
 	}
 }
@@ -171,7 +205,8 @@ const styles = StyleSheet.create({
 		fontFamily: "Montserrat",
 		fontWeight: "400",
 		fontSize: 20,
-		zIndex: 10
+		zIndex: 10,
+		textAlign:'center'
 	},
 	TextInputStyle: {
 		color: "#BDBDBD",
