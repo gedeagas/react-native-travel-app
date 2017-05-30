@@ -46,7 +46,7 @@ export default class MainView extends Component {
 	};
 	cumaCobaCoba() {
 		Animated.timing(
-			// Animate value over time
+			// Animate value ov
 			this.state.searchOpacity, // The value to drive
 			{
 				toValue: 1,
@@ -70,7 +70,7 @@ export default class MainView extends Component {
 
 	render() {
 		return (
-			<View>
+			<View style={{backgroundColor: "rgba(255, 255, 255, 0.0)"}}>
 				<Animated.View
 					style={{
 						backgroundColor: "#6A2EC7",
@@ -93,6 +93,8 @@ export default class MainView extends Component {
 						translucent={true}
 						barStyle="light-content"
 					/>
+									<SideMenu menuWidth={this.state.menuWidth} height={height}/>
+
 					<Image
 						style={styles.MainMenuContainer}
 						source={require("./Assets/Image/home.jpg")}
@@ -110,6 +112,8 @@ export default class MainView extends Component {
 
 						<View>
 						</View>
+
+						
 
 					</Image>
 
@@ -206,7 +210,7 @@ const styles = StyleSheet.create({
 		fontWeight: "400",
 		fontSize: 20,
 		zIndex: 10,
-		textAlign:'center'
+		textAlign:'left',
 	},
 	TextInputStyle: {
 		color: "#BDBDBD",

@@ -21,16 +21,17 @@ export default class SideMenu extends Component {
 			<Animated.View
 					style={{
 						backgroundColor: "#FFF",
-						width: width*0.75,
+						width: width,
                         position:'absolute',
                         top:0,
                         left:  this.props.menuWidth,
 						height: this.props.height,
+                        flexDirection:'row',
 						zIndex: 100,
 						
 					}}
 			>
-                <View>
+                <View style={{width: width*0.75}}>
                     <View>
                         <Image
 						style={[styles.imageHeader]}
@@ -59,6 +60,10 @@ export default class SideMenu extends Component {
 
                 </View>
 
+                <View style={{width:width*0.25, backgroundColor: 'rgba(33, 33, 33, 0.0)'}}>
+
+                </View>
+
 
 
 			</Animated.View>
@@ -76,7 +81,8 @@ const styles = StyleSheet.create({
         marginTop:-45,
         borderRadius:45,
         borderWidth:2,
-        borderColor:"#FFF"
+        borderColor:"#FFF",
+        zIndex:903,
         
     },
     nameStyle: {
