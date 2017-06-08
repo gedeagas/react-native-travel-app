@@ -80,11 +80,7 @@ export default class MainView extends Component {
 						position:'absolute',
 						opacity: this.state.searchOpacity
 					}}
-				/>
-
-
-				<SideMenu menuWidth={this.state.menuWidth} height={height}/>
-				
+				/>				
 
 
 				<ScrollView style={styles.container} onScroll={this.handleScroll} bounces={false}>
@@ -99,21 +95,11 @@ export default class MainView extends Component {
 						style={styles.MainMenuContainer}
 						source={require("./Assets/Image/home.jpg")}
 					>
-						<TouchableOpacity  onPress={this.burgerMenuTrigger.bind(this)}>
-							<Image
-							style={{width:27,height:27}}
-							source={require("./Assets/Image/brgr.png")}
-							/>
-						</TouchableOpacity>
+						
 
 						<View>
 							<Text style={styles.MainMenuTitle}>Travelokal</Text>
 						</View>
-
-						<View>
-						</View>
-
-						
 
 					</Image>
 
@@ -193,7 +179,7 @@ const styles = StyleSheet.create({
 	},
 	MainMenuContainer: {
 		flexDirection: "row",
-		justifyContent: "space-between",
+		justifyContent: "center",
 		backgroundColor: "rgba(255, 255, 255, 0.0)",
 		paddingTop: 35,
 		paddingBottom: 15,
@@ -211,6 +197,7 @@ const styles = StyleSheet.create({
 		fontSize: 20,
 		zIndex: 10,
 		textAlign:'left',
+
 	},
 	TextInputStyle: {
 		color: "#BDBDBD",

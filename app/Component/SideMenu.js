@@ -20,7 +20,7 @@ export default class SideMenu extends Component {
 		return (
 			<Animated.View
 					style={{
-						backgroundColor: "#FFF",
+						backgroundColor: "rgba(255, 255, 255, 0)",
 						width: width,
                         position:'absolute',
                         top:0,
