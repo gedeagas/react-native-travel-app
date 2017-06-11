@@ -104,7 +104,7 @@ export default class MainView extends Component {
 					</Image>
 
 					<TextInput
-						placeholder="Search Now...."
+						placeholder="Search Now...a."
 						style={styles.TextInputStyle}
 						onChangeText={text => this.setState({ text })}
 						value={this.state.text}
